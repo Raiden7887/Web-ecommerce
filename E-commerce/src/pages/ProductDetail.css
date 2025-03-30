@@ -1,0 +1,194 @@
+/* Container utama untuk detail produk */
+.product-detail-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Layout detail produk */
+.product-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Gambar produk */
+.product-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Informasi produk */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.product-info h1 {
+  color: #2d3748;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c5282;
+  margin: 0;
+}
+
+.description {
+  color: #4a5568;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Spesifikasi produk */
+.specifications {
+  background-color: #f7fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.specifications h2 {
+  color: #2d3748;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.specifications ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.specifications li {
+  color: #4a5568;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Tombol aksi */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.action-buttons button {
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.buy-now {
+  background-color: #48bb78;
+  color: white;
+}
+
+.buy-now:hover {
+  background-color: #38a169;
+}
+
+.wishlist {
+  background-color: #ed8936;
+  color: white;
+}
+
+.wishlist:hover {
+  background-color: #dd6b20;
+}
+
+.wishlist.active {
+  background-color: #c53030;
+}
+
+.wishlist.active:hover {
+  background-color: #a83232;
+}
+
+.add-to-cart {
+  background-color: #4299e1;
+  color: white;
+}
+
+.add-to-cart:hover {
+  background-color: #3182ce;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .product-detail {
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .product-image {
+    max-height: 300px;
+  }
+
+  .product-info h1 {
+    font-size: 1.75rem;
+  }
+
+  .specifications ul {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-detail-container {
+    padding: 1rem;
+  }
+
+  .product-detail {
+    padding: 1rem;
+  }
+
+  .product-info h1 {
+    font-size: 1.5rem;
+  }
+
+  .price {
+    font-size: 1.25rem;
+  }
+} 

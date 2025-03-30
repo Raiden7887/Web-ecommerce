@@ -1,0 +1,137 @@
+/* Container utama untuk checkout */
+.checkout-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.checkout-container h1 {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 2rem;
+}
+
+/* Layout checkout */
+.checkout-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+/* Form checkout */
+.checkout-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.checkout-form h2 {
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #48bb78;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #38a169;
+}
+
+/* Ringkasan pesanan */
+.order-summary {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  height: fit-content;
+}
+
+.order-summary h2 {
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+.summary-items {
+  margin-bottom: 1.5rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.item-info {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.summary-total {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+.summary-total .summary-item {
+  font-weight: 500;
+}
+
+.summary-total .summary-item.total {
+  font-weight: bold;
+  color: #2d3748;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .checkout-content {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+} 
