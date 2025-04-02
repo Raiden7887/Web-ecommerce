@@ -19,6 +19,21 @@
   padding: 1rem;
 }
 
+/* Tampilan tidak ada hasil */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 2rem 0;
+}
+
+.no-results p {
+  color: #4a5568;
+  font-size: 1.1rem;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .product-grid {
