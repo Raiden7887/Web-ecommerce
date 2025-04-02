@@ -1,3 +1,4 @@
+/* Container untuk form pencarian */
 .search-bar {
   display: flex;
   gap: 0.5rem;
@@ -6,6 +7,7 @@
   margin: 0 auto;
 }
 
+/* Style untuk input field pencarian */
 .search-input {
   flex: 1;
   padding: 0.75rem 1rem;
@@ -16,10 +18,12 @@
   transition: border-color 0.2s;
 }
 
+/* Style untuk input field saat difokuskan */
 .search-input:focus {
   border-color: #4299e1;
 }
 
+/* Style untuk tombol pencarian */
 .search-button {
   background-color: #4299e1;
   color: white;
@@ -31,15 +35,19 @@
   transition: background-color 0.2s;
 }
 
+/* Style untuk tombol pencarian saat dihover */
 .search-button:hover {
   background-color: #3182ce;
 }
 
+/* Media query untuk tampilan responsif pada layar kecil */
 @media (max-width: 640px) {
+  /* Mengubah layout menjadi vertikal pada layar mobile */
   .search-bar {
     flex-direction: column;
   }
 
+  /* Membuat tombol pencarian full width pada layar mobile */
   .search-button {
     width: 100%;
   }

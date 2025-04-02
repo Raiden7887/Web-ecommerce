@@ -5,7 +5,7 @@ import laptopImage from '../assets/laptop.jpeg';
 import hpImage from '../assets/HP.jpeg';
 import './ProductList.css';
 
-// Data dummy produk
+// Data dummy produk yang akan ditampilkan
 const products = [
   {
     id: 1,
@@ -41,12 +41,17 @@ const products = [
   }
 ];
 
+// Komponen utama untuk menampilkan daftar produk
 const ProductList = () => {
+  // State untuk menyimpan kata kunci pencarian
   const [searchTerm, setSearchTerm] = useState('');
+  // State untuk menyimpan daftar produk yang sudah difilter
   const [filteredProducts, setFilteredProducts] = useState(products);
 
+  // Fungsi untuk menangani pencarian produk
   const handleSearch = (term) => {
     setSearchTerm(term);
+    // Filter produk berdasarkan kata kunci pencarian
     const filtered = products.filter(product => 
       product.name.toLowerCase().includes(term.toLowerCase()) ||
       product.description.toLowerCase().includes(term.toLowerCase()) ||
@@ -58,13 +63,16 @@ const ProductList = () => {
   return (
     <div className="product-list-container">
       <h1>Daftar Produk</h1>
+      {/* Komponen SearchBar untuk input pencarian */}
       <SearchBar onSearch={handleSearch} />
       
+      {/* Menampilkan pesan jika tidak ada hasil pencarian */}
       {filteredProducts.length === 0 ? (
         <div className="no-results">
           <p>Tidak ada produk yang ditemukan untuk "{searchTerm}"</p>
         </div>
       ) : (
+        // Grid untuk menampilkan daftar produk
         <div className="product-grid">
           {filteredProducts.map(product => (
             <ProductCard key={product.id} product={product} />
