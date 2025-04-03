@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     // Cek apakah ada user yang tersimpan di localStorage
     const userData = localStorage.getItem('userData');
     if (userData) {
-      setUser(JSON.parse(userData));
+      setUser(JSON.stringify(userData));
     }
     setLoading(false);
   }, []);
