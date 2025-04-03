@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     const cred = JSON.stringify(userData);
-    const response = await axios.post('http://127.0.0.1/api/register', cred, {
+    const response = await axios.post('http://127.0.0.1:8000/api/register', cred, {
       headers: {
         'Content-Type': 'application/json'
       }
