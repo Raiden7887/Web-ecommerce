@@ -5,7 +5,7 @@ import './Auth.css';
 
 const Register = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,9 +38,10 @@ const Register = () => {
     }
 
     // Simulasi registrasi berhasil
-    login({
+    register({
       name: formData.name,
-      email: formData.email
+      email: formData.email,
+      password: formData.password
     });
     navigate('/products');
   };

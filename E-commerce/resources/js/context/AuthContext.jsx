@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -15,11 +16,29 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem('userData', JSON.stringify(userData));
-    localStorage.setItem('userToken', 'dummy-token');
+  const login = async (userData) => {
+    const cred = JSON.stringify(userData)
+    const response = await axios.post('http://127.0.0.1:8000/api/login', cred, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    setUser(response.data.userData);
+    localStorage.setItem('userData', JSON.stringify(response.data.userData));
+    localStorage.setItem('userToken', response.data.token);
   };
+
+  const register = async (userData) => {
+    const cred = JSON.stringify(userData);
+    const response = await axios.post('http://127.0.0.1/api/register', cred, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return response.data;
+  }
 
   const logout = () => {
     setUser(null);
@@ -30,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   const isAuthenticated = !!user;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, register, isAuthenticated, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );

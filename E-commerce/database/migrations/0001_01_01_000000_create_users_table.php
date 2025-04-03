@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->text('alamat')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('kode_pos')->nullable();
+            $table->enum('metode_pembayaran', ['Kartu Kredit', 'Kartu Debit', 'Transfer Bank', 'E-Wallet']);
+            $table->integer('nomor_transaksi')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

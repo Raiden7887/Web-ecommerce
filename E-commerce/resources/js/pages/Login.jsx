@@ -25,8 +25,8 @@ const Login = () => {
     if (formData.email && formData.password) {
       // Simulasi login berhasil
       login({
-        name: 'User Test',
-        email: formData.email
+        email: formData.email,
+        password: formData.password
       });
       navigate('/products');
     } else {
