@@ -7,14 +7,22 @@ import Checkout from '../pages/Checkout';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import UserProfile from '../pages/UserProfile';
-import { CartProvider } from '../context/CartContext';
-import { WishlistProvider } from '../context/WishlistContext';
+import { CartProvider, useCart } from '../context/CartContext';
+import { WishlistProvider, useWishlist } from '../context/WishlistContext';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 
 import React from 'react';
 
+// Komponen untuk menampilkan badge pada link navbar
+const NavBadge = ({ count }) => {
+  if (count <= 0) return null;
+  return <span className="nav-badge">{count}</span>;
+};
+
 function AppContent() {
   const { isAuthenticated, user } = useAuth();
+  const { cart } = useCart();
+  const { wishlist } = useWishlist();
 
   return (
     <div className="app">
@@ -26,8 +34,14 @@ function AppContent() {
           <Link to="/products">Produk</Link>
           {isAuthenticated ? (
             <>
-              <Link to="/wishlist">Wishlist</Link>
-              <Link to="/cart">Keranjang</Link>
+              <Link to="/wishlist">
+                Wishlist
+                <NavBadge count={wishlist.length} />
+              </Link>
+              <Link to="/cart">
+                Keranjang
+                <NavBadge count={cart.length} />
+              </Link>
               <Link to="/profile" className="user-button">
                 {user?.name}
               </Link>

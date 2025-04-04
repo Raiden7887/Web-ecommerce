@@ -90,11 +90,31 @@
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.2s;
+  position: relative;
 }
 
 /* Efek hover untuk link navbar */
 .nav-links a:hover {
   background-color: #4a5568;
+}
+
+/* Style untuk badge pada link navbar */
+.nav-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #e53e3e;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  border: 2px solid #2d3748;
 }
 
 /* Style untuk tombol logout */
@@ -168,5 +188,12 @@
 
   .user-button {
     width: 100%;
+  }
+  
+  /* Menyesuaikan posisi badge untuk mobile */
+  .nav-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }
