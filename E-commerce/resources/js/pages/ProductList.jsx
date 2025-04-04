@@ -5,7 +5,7 @@ import laptopImage from '../assets/laptop.jpeg';
 import hpImage from '../assets/HP.jpeg';
 import './ProductList.css';
 
-// Data dummy produk yang akan ditampilkan
+// Data dummy produk (dalam praktik nyata, ini akan diambil dari API)
 const products = [
   {
     id: 1,
@@ -43,9 +43,8 @@ const products = [
 
 // Komponen utama untuk menampilkan daftar produk
 const ProductList = () => {
-  // State untuk menyimpan kata kunci pencarian
+  // State untuk menyimpan kata kunci pencarian dan hasil filter
   const [searchTerm, setSearchTerm] = useState('');
-  // State untuk menyimpan daftar produk yang sudah difilter
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   // Fungsi untuk menangani pencarian produk
@@ -60,6 +59,7 @@ const ProductList = () => {
     setFilteredProducts(filtered);
   };
 
+  // Render komponen ProductList
   return (
     <div className="product-list-container">
       <h1>Daftar Produk</h1>

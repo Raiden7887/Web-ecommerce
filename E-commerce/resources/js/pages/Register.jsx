@@ -3,9 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Auth.css';
 
+// Komponen Register untuk menangani proses pendaftaran pengguna baru
 const Register = () => {
+  // Hook untuk navigasi dan autentikasi
   const navigate = useNavigate();
   const { register } = useAuth();
+  
+  // State untuk menyimpan data form dan pesan error
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,6 +18,7 @@ const Register = () => {
   });
   const [error, setError] = useState('');
 
+  // Fungsi untuk menangani perubahan input form
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -22,36 +27,40 @@ const Register = () => {
     }));
   };
 
+  // Fungsi untuk menangani submit form
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validasi password
+    // Validasi kecocokan password
     if (formData.password !== formData.confirmPassword) {
       setError('Password tidak cocok');
       return;
     }
 
-    // Validasi form
+    // Validasi kelengkapan form
     if (!formData.name || !formData.email || !formData.password) {
       setError('Semua field harus diisi');
       return;
     }
 
-    // Simulasi registrasi berhasil
+    // Melakukan proses registrasi
     register({
       name: formData.name,
       email: formData.email,
       password: formData.password
     });
+    // Navigasi ke halaman produk setelah registrasi berhasil
     navigate('/products');
   };
 
+  // Render komponen Register
   return (
     <div className="auth-container">
       <div className="auth-box">
         <h2>Daftar</h2>
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
+          {/* Form input nama */}
           <div className="form-group">
             <label htmlFor="name">Nama Lengkap</label>
             <input
@@ -63,6 +72,7 @@ const Register = () => {
               required
             />
           </div>
+          {/* Form input email */}
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -74,6 +84,7 @@ const Register = () => {
               required
             />
           </div>
+          {/* Form input password */}
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -85,6 +96,7 @@ const Register = () => {
               required
             />
           </div>
+          {/* Form input konfirmasi password */}
           <div className="form-group">
             <label htmlFor="confirmPassword">Konfirmasi Password</label>
             <input
@@ -96,10 +108,12 @@ const Register = () => {
               required
             />
           </div>
+          {/* Tombol submit */}
           <button type="submit" className="auth-button">
             Daftar
           </button>
         </form>
+        {/* Link ke halaman login */}
         <p className="auth-link">
           Sudah punya akun? <Link to="/login">Login di sini</Link>
         </p>

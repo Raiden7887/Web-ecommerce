@@ -62,22 +62,31 @@ const products = [
   }
 ];
 
+// Komponen untuk menampilkan detail produk
 const ProductDetail = () => {
+  // Hook untuk mendapatkan parameter URL dan navigasi
   const { id } = useParams();
   const navigate = useNavigate();
+  
+  // Hook untuk mengakses fungsi keranjang dan wishlist
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  
+  // Mencari produk berdasarkan ID
   const product = products.find(p => p.id === parseInt(id));
 
+  // Menampilkan pesan jika produk tidak ditemukan
   if (!product) {
     return <div>Produk tidak ditemukan</div>;
   }
 
+  // Fungsi untuk menangani pembelian langsung
   const handleBuyNow = () => {
     addToCart(product);
     navigate('/checkout');
   };
 
+  // Fungsi untuk menangani penambahan/penghapusan dari wishlist
   const handleWishlist = () => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
@@ -88,22 +97,28 @@ const ProductDetail = () => {
     }
   };
 
+  // Fungsi untuk menambahkan ke keranjang
   const handleAddToCart = () => {
     addToCart(product);
     alert('Produk berhasil ditambahkan ke keranjang!');
   };
 
+  // Render komponen ProductDetail
   return (
     <div className="product-detail-container">
       <div className="product-detail">
+        {/* Bagian gambar produk */}
         <div className="product-image">
           <img src={product.image} alt={product.name} />
         </div>
+        
+        {/* Bagian informasi produk */}
         <div className="product-info">
           <h1>{product.name}</h1>
           <p className="price">Rp {product.price.toLocaleString()}</p>
           <p className="description">{product.description}</p>
           
+          {/* Bagian spesifikasi produk */}
           <div className="specifications">
             <h2>Spesifikasi:</h2>
             <ul>
@@ -114,6 +129,7 @@ const ProductDetail = () => {
             </ul>
           </div>
 
+          {/* Bagian tombol aksi */}
           <div className="action-buttons">
             <button className="buy-now" onClick={handleBuyNow}>
               Beli Sekarang

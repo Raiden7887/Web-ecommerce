@@ -1,36 +1,38 @@
 /* Container utama untuk checkout */
 .checkout-container {
-  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
 }
 
+/* Judul halaman */
 .checkout-container h1 {
   text-align: center;
-  color: #2d3748;
   margin-bottom: 2rem;
+  color: #2d3748;
 }
 
-/* Layout checkout */
+/* Layout konten checkout */
 .checkout-content {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
-/* Form checkout */
+/* Style untuk form checkout */
 .checkout-form {
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .checkout-form h2 {
-  color: #2d3748;
   margin-bottom: 1.5rem;
+  color: #2d3748;
 }
 
+/* Style untuk grup form */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -50,49 +52,64 @@
   border: 1px solid #e2e8f0;
   border-radius: 4px;
   font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
 }
 
 .form-group textarea {
-  height: 100px;
+  min-height: 100px;
   resize: vertical;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
+/* Style untuk tombol submit */
 .submit-button {
   width: 100%;
-  background-color: #48bb78;
+  padding: 1rem;
+  background-color: #4299e1;
   color: white;
   border: none;
-  padding: 1rem;
   border-radius: 4px;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .submit-button:hover {
-  background-color: #38a169;
+  background-color: #3182ce;
 }
 
-/* Ringkasan pesanan */
+/* Style untuk pesan error */
+.error-message {
+  background-color: #fed7d7;
+  color: #c53030;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Style untuk ringkasan pesanan */
 .order-summary {
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  height: fit-content;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .order-summary h2 {
-  color: #2d3748;
   margin-bottom: 1.5rem;
+  color: #2d3748;
 }
 
+/* Style untuk item dalam ringkasan */
 .summary-items {
   margin-bottom: 1.5rem;
 }
@@ -100,29 +117,52 @@
 .summary-item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
-  color: #4a5568;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .item-info {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.summary-total {
-  border-top: 1px solid #e2e8f0;
+.item-info span:first-child {
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.item-info span:last-child {
+  color: #718096;
+  font-size: 0.875rem;
+}
+
+.item-price {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Style untuk total ringkasan */
+.summary-totals {
+  border-top: 2px solid #e2e8f0;
   padding-top: 1rem;
 }
 
-.summary-total .summary-item {
-  font-weight: 500;
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
 }
 
-.summary-total .summary-item.total {
-  font-weight: bold;
+.summary-row.total {
+  font-weight: 600;
   color: #2d3748;
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
 }
 
 /* Responsive design */
@@ -131,7 +171,12 @@
     grid-template-columns: 1fr;
   }
 
-  .form-row {
-    grid-template-columns: 1fr;
+  .checkout-container {
+    padding: 1rem;
+  }
+
+  .checkout-form,
+  .order-summary {
+    padding: 1.5rem;
   }
 } 
