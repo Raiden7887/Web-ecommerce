@@ -15,6 +15,10 @@ const Login = () => {
     password: ''
   });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [popupType, setPopupType] = useState(''); // 'success' atau 'error'
 
   // Fungsi untuk menangani perubahan input form
   const handleChange = (e) => {
@@ -25,19 +29,52 @@ const Login = () => {
     }));
   };
 
+  // Fungsi untuk menampilkan popup
+  const showNotification = (message, type) => {
+    setPopupMessage(message);
+    setPopupType(type);
+    setShowPopup(true);
+    
+    // Sembunyikan popup setelah 3 detik
+    setTimeout(() => {
+      setShowPopup(false);
+      // Jika login berhasil, arahkan ke halaman produk
+      if (type === 'success') {
+        navigate('/products');
+      }
+    }, 3000);
+  };
+
   // Fungsi untuk menangani submit form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.email && formData.password) {
+    setError('');
+    setIsLoading(true);
+
+    try {
+      // Validasi input
+      if (!formData.email || !formData.password) {
+        setError('Email dan password harus diisi');
+        showNotification('Email dan password harus diisi', 'error');
+        setIsLoading(false);
+        return;
+      }
+
       // Melakukan proses login
-      login({
+      const loginSuccess = await login({
         email: formData.email,
         password: formData.password
       });
-      // Navigasi ke halaman produk setelah login berhasil
-      navigate('/products');
-    } else {
-      setError('Email dan password harus diisi');
+
+      if (loginSuccess) {
+        showNotification('Login berhasil! Mengalihkan...', 'success');
+      } else {
+        showNotification('Email atau password salah', 'error');
+      }
+    } catch (err) {
+      showNotification('Terjadi kesalahan saat login', 'error');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -47,6 +84,14 @@ const Login = () => {
       <div className="auth-box">
         <h2>Login</h2>
         {error && <div className="error-message">{error}</div>}
+        
+        {/* Popup Notifikasi */}
+        {showPopup && (
+          <div className={`popup-notification ${popupType}`}>
+            {popupMessage}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           {/* Form input email */}
           <div className="form-group">
@@ -58,6 +103,7 @@ const Login = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              disabled={isLoading}
             />
           </div>
           {/* Form input password */}
@@ -70,11 +116,16 @@ const Login = () => {
               value={formData.password}
               onChange={handleChange}
               required
+              disabled={isLoading}
             />
           </div>
           {/* Tombol submit */}
-          <button type="submit" className="auth-button">
-            Login
+          <button 
+            type="submit" 
+            className="auth-button"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Sedang Login...' : 'Login'}
           </button>
         </form>
         {/* Link ke halaman registrasi */}
