@@ -36,16 +36,60 @@
   font-size: 1.1rem;
 }
 
+/* Media query untuk tampilan layar besar */
+@media (min-width: 1400px) {
+  .product-grid {
+    grid-template-columns: repeat(5, 1fr); /* 5 produk per baris untuk layar sangat besar */
+    gap: 1.5rem;
+  }
+  
+  .product-list-container {
+    max-width: 1600px; /* Lebar maksimum yang lebih besar untuk layar sangat besar */
+  }
+}
+
+/* Media query untuk tampilan layar medium besar */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 produk per baris untuk layar besar */
+    gap: 1.5rem;
+  }
+  
+  .product-list-container {
+    max-width: 1400px; /* Lebar maksimum yang lebih besar untuk layar besar */
+  }
+}
+
+/* Media query untuk tampilan tablet */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 produk per baris untuk tablet */
+    gap: 1.5rem;
+  }
+}
+
 /* Media query untuk tampilan responsif pada layar kecil */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* Menyesuaikan ukuran grid untuk layar mobile */
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* 2 produk per baris untuk mobile */
     gap: 1rem;
   }
   
   /* Mengurangi padding container pada layar mobile */
   .product-list-container {
     padding: 1rem;
+  }
+}
+
+/* Media query untuk tampilan sangat kecil */
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr; /* 1 produk per baris untuk layar sangat kecil */
+    gap: 1rem;
+  }
+  
+  .product-list-container {
+    padding: 0.75rem;
   }
 } 
