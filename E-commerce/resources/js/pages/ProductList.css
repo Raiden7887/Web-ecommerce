@@ -3,6 +3,9 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Style untuk judul halaman */
@@ -14,10 +17,18 @@
 
 /* Grid layout untuk menampilkan produk dalam bentuk grid */
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 2rem;
   padding: 1rem;
+  width: 100%;
+}
+
+.product-grid > * {
+  flex: 0 1 250px;
+  min-width: 250px;
+  max-width: 250px;
 }
 
 /* Style untuk tampilan ketika tidak ada hasil pencarian */
@@ -38,58 +49,36 @@
 
 /* Media query untuk tampilan layar besar */
 @media (min-width: 1400px) {
-  .product-grid {
-    grid-template-columns: repeat(5, 1fr); /* 5 produk per baris untuk layar sangat besar */
-    gap: 1.5rem;
-  }
-  
   .product-list-container {
-    max-width: 1600px; /* Lebar maksimum yang lebih besar untuk layar sangat besar */
+    max-width: 1600px;
   }
 }
 
 /* Media query untuk tampilan layar medium besar */
 @media (min-width: 1200px) and (max-width: 1399px) {
-  .product-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 produk per baris untuk layar besar */
-    gap: 1.5rem;
-  }
-  
   .product-list-container {
-    max-width: 1400px; /* Lebar maksimum yang lebih besar untuk layar besar */
-  }
-}
-
-/* Media query untuk tampilan tablet */
-@media (min-width: 768px) and (max-width: 1199px) {
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 produk per baris untuk tablet */
-    gap: 1.5rem;
+    max-width: 1400px;
   }
 }
 
 /* Media query untuk tampilan responsif pada layar kecil */
 @media (max-width: 767px) {
-  /* Menyesuaikan ukuran grid untuk layar mobile */
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 produk per baris untuk mobile */
-    gap: 1rem;
-  }
-  
-  /* Mengurangi padding container pada layar mobile */
   .product-list-container {
     padding: 1rem;
+  }
+  
+  .product-grid {
+    gap: 1rem;
   }
 }
 
 /* Media query untuk tampilan sangat kecil */
 @media (max-width: 480px) {
-  .product-grid {
-    grid-template-columns: 1fr; /* 1 produk per baris untuk layar sangat kecil */
-    gap: 1rem;
-  }
-  
   .product-list-container {
     padding: 0.75rem;
+  }
+  
+  .product-grid {
+    gap: 1rem;
   }
 } 

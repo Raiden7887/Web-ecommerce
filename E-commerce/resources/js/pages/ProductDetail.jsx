@@ -58,8 +58,22 @@ const ProductDetail = () => {
 
   // Fungsi untuk menangani pembelian langsung
   const handleBuyNow = () => {
-    addToCart(product);
-    navigate('/checkout');
+    // Menyiapkan data produk untuk checkout
+    const checkoutData = {
+      items: [{
+        ...product,
+        quantity: 1
+      }],
+      totalPrice: product.price,
+      shippingCost: 15000,
+      finalTotal: product.price + 15000
+    };
+
+    // Menyimpan data checkout ke sessionStorage
+    sessionStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+    
+    // Navigasi ke halaman checkout
+    navigate('/checkout', { state: { directBuy: true } });
   };
 
   // Fungsi untuk menangani penambahan/penghapusan dari wishlist
