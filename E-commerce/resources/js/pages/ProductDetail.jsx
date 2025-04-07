@@ -13,52 +13,28 @@ const products = [
     name: "Smartphone XYZ",
     price: 2999999,
     description: "Smartphone terbaru dengan spesifikasi tinggi",
-    image: hpImage,
-    specs: {
-      processor: "Snapdragon 8 Gen 2",
-      ram: "8GB",
-      storage: "256GB",
-      battery: "5000mAh"
-    }
+    image: hpImage
   },
   {
     id: 2,
     name: "Laptop ABC",
     price: 12999999,
     description: "Laptop gaming dengan performa maksimal",
-    image: laptopImage,
-    specs: {
-      processor: "Intel Core i7 12th Gen",
-      ram: "16GB",
-      storage: "1TB SSD",
-      battery: "90Wh"
-    }
+    image: laptopImage
   },
   {
     id: 3,
     name: "Smartphone Pro",
     price: 3999999,
     description: "Smartphone premium dengan kamera berkualitas tinggi",
-    image: hpImage,
-    specs: {
-      processor: "Snapdragon 8 Gen 3",
-      ram: "12GB",
-      storage: "512GB",
-      battery: "5500mAh"
-    }
+    image: hpImage
   },
   {
     id: 4,
     name: "Laptop Ultra",
     price: 15999999,
     description: "Laptop tipis dengan performa tinggi",
-    image: laptopImage,
-    specs: {
-      processor: "Intel Core i9 13th Gen",
-      ram: "32GB",
-      storage: "2TB SSD",
-      battery: "100Wh"
-    }
+    image: laptopImage
   }
 ];
 
@@ -118,17 +94,6 @@ const ProductDetail = () => {
           <p className="price">Rp {product.price.toLocaleString()}</p>
           <p className="description">{product.description}</p>
           
-          {/* Bagian spesifikasi produk */}
-          <div className="specifications">
-            <h2>Spesifikasi:</h2>
-            <ul>
-              <li>Processor: {product.specs.processor}</li>
-              <li>RAM: {product.specs.ram}</li>
-              <li>Storage: {product.specs.storage}</li>
-              <li>Battery: {product.specs.battery}</li>
-            </ul>
-          </div>
-
           {/* Bagian tombol aksi */}
           <div className="action-buttons">
             <button className="buy-now" onClick={handleBuyNow}>

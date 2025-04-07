@@ -12,32 +12,28 @@ const products = [
     name: "Smartphone XYZ",
     price: 2999999,
     description: "Smartphone terbaru dengan spesifikasi tinggi",
-    image: hpImage,
-    category: "smartphone"
+    image: hpImage
   },
   {
     id: 2,
     name: "Laptop ABC",
     price: 12999999,
     description: "Laptop gaming dengan performa maksimal",
-    image: laptopImage,
-    category: "laptop"
+    image: laptopImage
   },
   {
     id: 3,
     name: "Smartphone Pro",
     price: 3999999,
     description: "Smartphone premium dengan kamera berkualitas tinggi",
-    image: hpImage,
-    category: "smartphone"
+    image: hpImage
   },
   {
     id: 4,
     name: "Laptop Ultra",
     price: 15999999,
     description: "Laptop tipis dengan performa tinggi",
-    image: laptopImage,
-    category: "laptop"
+    image: laptopImage
   }
 ];
 
@@ -53,8 +49,7 @@ const ProductList = () => {
     // Filter produk berdasarkan kata kunci pencarian
     const filtered = products.filter(product => 
       product.name.toLowerCase().includes(term.toLowerCase()) ||
-      product.description.toLowerCase().includes(term.toLowerCase()) ||
-      product.category.toLowerCase().includes(term.toLowerCase())
+      product.description.toLowerCase().includes(term.toLowerCase())
     );
     setFilteredProducts(filtered);
   };
