@@ -39,6 +39,7 @@ const Wishlist = () => {
               <div className="wishlist-item-info">
                 <h3>{item.name}</h3>
                 <p className="price">Rp {item.price.toLocaleString()}</p>
+                <p className="description">{item.description}</p>
               </div>
               {/* Tombol hapus dari wishlist */}
               <button 

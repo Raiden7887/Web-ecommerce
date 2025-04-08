@@ -5,14 +5,18 @@ import './ProductCard.css';
 const ProductCard = ({ product }) => {
   return (
     <div className="product-card">
-      <Link to={`/product/${product.id}`}>
+      <Link to={`/product/${product.id}`} className="product-link">
         <img src={product.image} alt={product.name} className="product-image" />
-        <div className="product-info">
-          <h3>{product.name}</h3>
-          <p className="price">Rp {product.price.toLocaleString()}</p>
-          <p className="description">{product.description}</p>
-        </div>
       </Link>
+      <div className="product-info">
+        <div className="product-name-price">
+          <h3 title={product.name}>{product.name}</h3>
+          <p className="price" title={`Rp ${product.price.toLocaleString()}`}>
+            Rp {product.price.toLocaleString()}
+          </p>
+        </div>
+        <p className="description">{product.description}</p>
+      </div>
     </div>
   );
 };

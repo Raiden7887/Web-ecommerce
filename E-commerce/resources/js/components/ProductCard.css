@@ -6,6 +6,10 @@
   transition: transform 0.2s;
   background: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .product-card:hover {
@@ -13,30 +17,121 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
+/* Style untuk link produk */
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+}
+
 .product-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  display: block;
 }
 
 .product-info {
   padding: 1rem;
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Wrapper untuk nama dan harga produk */
+.product-name-price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .product-info h3 {
   margin: 0;
   font-size: 1.1rem;
   color: #333;
+  font-weight: 600;
+  line-height: 1.2;
+  /* Menghapus white-space: nowrap untuk memungkinkan wrapping */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .price {
   font-weight: bold;
   color: #2c5282;
-  margin: 0.5rem 0;
+  margin: 0;
+  font-size: 1.2rem;
 }
 
 .description {
   color: #666;
   font-size: 0.9rem;
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Media query untuk tampilan tablet */
+@media (max-width: 1024px) {
+  .product-image {
+    height: 180px;
+  }
+  
+  .product-info {
+    padding: 0.9rem;
+  }
+  
+  .product-info h3 {
+    font-size: 1.05rem;
+  }
+}
+
+/* Media query untuk tampilan mobile */
+@media (max-width: 768px) {
+  .product-image {
+    height: 160px;
+  }
+  
+  .product-info {
+    padding: 0.75rem;
+  }
+  
+  .product-info h3 {
+    font-size: 1rem;
+  }
+  
+  .price {
+    font-size: 1.1rem;
+  }
+  
+  .description {
+    display: none; /* Menyembunyikan deskripsi di mobile untuk menghemat ruang */
+  }
+}
+
+/* Media query untuk tampilan sangat kecil */
+@media (max-width: 480px) {
+  .product-image {
+    height: 140px;
+  }
+  
+  .product-info {
+    padding: 0.6rem;
+  }
+  
+  .product-info h3 {
+    font-size: 0.95rem;
+  }
+  
+  .price {
+    font-size: 1rem;
+  }
 } 

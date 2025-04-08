@@ -16,6 +16,7 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   width: 100%;
   max-width: 400px;
+  position: relative; /* Untuk positioning popup */
 }
 
 .auth-box h2 {
@@ -50,6 +51,11 @@
   border-color: #4299e1;
 }
 
+.form-group input:disabled {
+  background-color: #f7fafc;
+  cursor: not-allowed;
+}
+
 /* Button */
 .auth-button {
   width: 100%;
@@ -64,8 +70,13 @@
   transition: background-color 0.2s;
 }
 
-.auth-button:hover {
+.auth-button:hover:not(:disabled) {
   background-color: #3182ce;
+}
+
+.auth-button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
 }
 
 /* Error message */
@@ -95,6 +106,40 @@
   text-decoration: underline;
 }
 
+/* Popup Notification */
+.popup-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  animation: slideIn 0.3s ease-out;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.popup-notification.success {
+  background-color: #48bb78;
+}
+
+.popup-notification.error {
+  background-color: #e53e3e;
+}
+
+/* Animation untuk popup */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 /* Responsive design */
 @media (max-width: 480px) {
   .auth-container {
@@ -103,5 +148,12 @@
 
   .auth-box {
     padding: 1.5rem;
+  }
+
+  .popup-notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    text-align: center;
   }
 } 

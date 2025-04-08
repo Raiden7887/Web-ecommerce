@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './Checkout.css';
 
@@ -7,7 +7,14 @@ import './Checkout.css';
 const Checkout = () => {
   // Hook untuk navigasi dan fungsi keranjang
   const navigate = useNavigate();
+  const location = useLocation();
   const { cart, getTotalPrice } = useCart();
+  
+  // State untuk menyimpan data checkout
+  const [checkoutItems, setCheckoutItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [shippingCost] = useState(15000);
+  const [finalTotal, setFinalTotal] = useState(0);
   
   // State untuk menyimpan data form checkout
   const [formData, setFormData] = useState({
@@ -22,6 +29,25 @@ const Checkout = () => {
 
   // State untuk menyimpan pesan error
   const [error, setError] = useState('');
+
+  // Effect untuk menginisialisasi data checkout
+  useEffect(() => {
+    // Cek apakah ini pembelian langsung
+    if (location.state?.directBuy) {
+      const savedCheckoutData = JSON.parse(sessionStorage.getItem('checkoutData'));
+      if (savedCheckoutData) {
+        setCheckoutItems(savedCheckoutData.items);
+        setTotalPrice(savedCheckoutData.totalPrice);
+        setFinalTotal(savedCheckoutData.finalTotal);
+      }
+    } else {
+      // Jika dari keranjang, gunakan data cart
+      setCheckoutItems(cart);
+      const cartTotal = getTotalPrice();
+      setTotalPrice(cartTotal);
+      setFinalTotal(cartTotal + shippingCost);
+    }
+  }, [location.state, cart, getTotalPrice, shippingCost]);
 
   // Fungsi untuk menangani perubahan input form
   const handleChange = (e) => {
@@ -65,15 +91,22 @@ const Checkout = () => {
     }
 
     // Proses checkout (dalam praktik nyata, ini akan mengirim data ke API)
-    console.log('Checkout data:', formData);
+    console.log('Checkout data:', {
+      ...formData,
+      items: checkoutItems,
+      totalPrice,
+      shippingCost,
+      finalTotal
+    });
+
+    // Bersihkan data checkout jika pembelian langsung
+    if (location.state?.directBuy) {
+      sessionStorage.removeItem('checkoutData');
+    }
+
     alert('Pesanan berhasil dibuat!');
     navigate('/products');
   };
-
-  // Menghitung total harga dan ongkos kirim
-  const totalPrice = getTotalPrice();
-  const shippingCost = 15000;
-  const finalTotal = totalPrice + shippingCost;
 
   // Render komponen Checkout
   return (
@@ -192,7 +225,7 @@ const Checkout = () => {
         <div className="order-summary">
           <h2>Ringkasan Pesanan</h2>
           <div className="summary-items">
-            {cart.map(item => (
+            {checkoutItems.map(item => (
               <div key={item.id} className="summary-item">
                 <div className="item-info">
                   <span>{item.name}</span>

@@ -11,6 +11,7 @@ const cartItems = [
     id: 1,
     name: "Smartphone XYZ",
     price: 2999999,
+    description: "Smartphone terbaru dengan spesifikasi tinggi",
     image: hpImage,
     quantity: 1
   },
@@ -18,6 +19,7 @@ const cartItems = [
     id: 2,
     name: "Laptop ABC",
     price: 12999999,
+    description: "Laptop gaming dengan performa maksimal",
     image: laptopImage,
     quantity: 1
   },
@@ -25,6 +27,7 @@ const cartItems = [
     id: 3,
     name: "Smartphone Pro",
     price: 3999999,
+    description: "Smartphone premium dengan kamera berkualitas tinggi",
     image: hpImage,
     quantity: 1
   }
@@ -80,6 +83,7 @@ const Cart = () => {
                 <div className="cart-item-info">
                   <h3>{item.name}</h3>
                   <p className="price">Rp {item.price.toLocaleString()}</p>
+                  <p className="description">{item.description}</p>
                   {/* Kontrol jumlah item */}
                   <div className="quantity-controls">
                     <button 
