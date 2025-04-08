@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -11,3 +12,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', RegisterController::class)->name('register');
 Route::post('/login', LoginController::class)->name('login');
+
+Route::get('/products', [ProductController::class, 'product_list']);
+Route::get('/product/{id}', [ProductController::class, 'get_product']);
+Route::post('/product/create', [ProductController::class, 'product_create']);
