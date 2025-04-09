@@ -15,14 +15,11 @@ const ProductList = () => {
         const response = await axios.get('http://127.0.0.1:8000/api/products');
         const data = response.data;
         const products = data.products.data;
-        console.log(response.data) // Mengambil data keseluruhan dari response (Perhatikan masing-masing parent/childnya)
-        const isSuccess = response.data.success;
-        console.log(products.data) // Mengambil data Products yang ada
-        console.log(products) // Mengambil struktur data (Lihat response di whatsapp)
-        console.log(isSuccess) // Mengambil data apakah pengambilan data sudah sukses
-        if (response.data.success) {
-          setProducts(response.data.data);
-          setFilteredProducts(response.data.data);
+        console.log(data);
+        console.log(products)
+        if (data.success) {
+          setProducts(products);
+          setFilteredProducts(products);
         }
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -46,14 +43,14 @@ const ProductList = () => {
     <div className="product-list-container">
       <h1>Daftar Produk</h1>
       <SearchBar onSearch={handleSearch} />
-      {filteredProducts.length === 0 ? (
+      {filteredProducts && filteredProducts.length === 0 ? (
         <div className="no-results">
           <p>Tidak ada produk yang ditemukan untuk "{searchTerm}"</p>
         </div>
       ) : (
         <div className="product-grid">
-          {filteredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
+          {filteredProducts && filteredProducts.map((product, index) => (
+            <ProductCard key={index} product={product} />
           ))}
         </div>
       )}

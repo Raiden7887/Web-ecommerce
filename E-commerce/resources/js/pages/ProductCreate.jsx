@@ -20,6 +20,7 @@ const ProductCreate = () => {
       ...prev,
       [name]: value
     }));
+    console.log(formData)
   };
 
   const handleImageChange = (e) => {
@@ -27,33 +28,42 @@ const ProductCreate = () => {
       ...prev,
       image: e.target.files[0]
     }));
+    console.log(formData)
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+    console.log(formData)
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('nama', formData.nama);
-    formDataToSend.append('harga', formData.harga);
-    formDataToSend.append('deskripsi', formData.deskripsi);
-    formDataToSend.append('stock', formData.stock);
-    if (formData.image) {
-      formDataToSend.append('image', formData.image);
+    // const formDataToSend = new FormData();
+    // formDataToSend.append('nama', formData.nama);
+    // formDataToSend.append('harga', formData.harga);
+    // formDataToSend.append('deskripsi', formData.deskripsi);
+    // formDataToSend.append('stock', formData.stock);
+    // if (formData.image) {
+    //   formDataToSend.append('image', document.querySelector('#image').files);
+    // }
+    
+    const test = {
+      nama: formData.nama,
+      deskripsi: formData.deskripsi,
+      harga: formData.harga,
+      stock: formData.stock,
+      image: document.querySelector('#image').files
     }
 
     try {
-      const response = await fetch('http://127.0.0.1/api/product/create', {
-        method: 'POST',
-        body: formDataToSend
-      });
-      const data = await response.json();
-      if (data.success) {
-        navigate('/products');
-      } else {
-        setError(data.message || 'Gagal membuat produk');
-      }
+      await axios.post('http://127.0.0.1:8000/api/create/product', test, {
+        headers: {
+        'Content-Type': 'multipart/form-data'
+        }
+      }).then((res) => {
+        console.log(res);
+      }).catch((e) => {
+        console.log(e)
+      })
     } catch (error) {
       setError('Terjadi kesalahan saat membuat produk');
     } finally {
@@ -65,7 +75,7 @@ const ProductCreate = () => {
     <div className="product-create-container">
       <h1>Buat Produk Baru</h1>
       {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <div className="form-group">
           <label htmlFor="nama">Nama</label>
           <input

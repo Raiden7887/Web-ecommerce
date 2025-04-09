@@ -15,4 +15,5 @@ Route::post('/login', LoginController::class)->name('login');
 
 Route::get('/products', [ProductController::class, 'product_list']);
 Route::get('/product/{id}', [ProductController::class, 'get_product']);
-Route::post('/product/create', [ProductController::class, 'product_create']);
+
+Route::post('/create/product', [ProductController::class, 'product_create']);

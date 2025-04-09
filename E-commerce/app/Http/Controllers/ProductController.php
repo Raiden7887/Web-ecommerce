@@ -45,11 +45,13 @@ class ProductController extends Controller
         }
         $image = null;
         if ($request->image) {
+            for ( $i = 0; $i < count($request->image); $i++ ) {
             $filename = str()->random(30);
-            $extension = $request->image->extension();
-
-            Storage::putFileAs('product_images', $request->image, $filename.'.'.$extension);
-            $image = $filename.'.'.$extension;
+                $extension = $request->image[$i]->extension();
+    
+                Storage::putFileAs('product_images', $request->image[$i], $filename.'.'.$extension);
+                $image = $filename.'.'.$extension;
+            }
         }
 
         $product = Product::create([
@@ -58,7 +60,7 @@ class ProductController extends Controller
             'deskripsi' => $request->deskripsi,
             'stock' => $request->stock,
             'image' => $image != null ? $image : null,
-            'created_by' => Auth::user('id') != null ? Auth::user('id') : 'guest',
+            'created_by' => 'guest',
             'deleted' => 0
         ]);
         if ($product) {

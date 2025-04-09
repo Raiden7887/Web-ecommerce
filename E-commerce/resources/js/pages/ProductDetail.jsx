@@ -15,10 +15,11 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/products/${id}`);
-        const data = await response.json();
+        const response = await axios.get(`http://127.0.0.1:8000/api/product/${id}`);
+        const data = response.data.data;
+        console.log(data);
         if (data.success) {
-          setProduct(data.data);
+          setProduct(data.products);
         } else {
           navigate('/products');
         }
@@ -29,10 +30,6 @@ const ProductDetail = () => {
 
     fetchProduct();
   }, [id, navigate]);
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
 
   // Fungsi untuk menangani pembelian langsung
   const handleBuyNow = () => {

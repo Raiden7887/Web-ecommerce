@@ -12,6 +12,7 @@ import { WishlistProvider, useWishlist } from '../context/WishlistContext';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 
 import React from 'react';
+import ProductCreate from '../pages/ProductCreate';
 
 // Komponen untuk menampilkan badge pada link navbar
 const NavBadge = ({ count }) => {
@@ -59,6 +60,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<ProductList />} />
           <Route path="/products" element={<ProductList />} />
+          <Route path='/product/create' element={<ProductCreate />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/wishlist" element={isAuthenticated ? <Wishlist /> : <Login />} />
           <Route path="/cart" element={isAuthenticated ? <Cart /> : <Login />} />
