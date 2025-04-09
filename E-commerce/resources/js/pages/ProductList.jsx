@@ -12,8 +12,13 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/products');
-        const data = await response.data;
+        const response = await axios.get('http://127.0.0.1:8000/api/products');
+        console.log(response.data) // Mengambil data keseluruhan dari response (Perhatikan masing-masing parent/childnya)
+        const isSuccess = response.data.success;
+        const products = response.data.products;
+        console.log(products.data) // Mengambil data Products yang ada
+        console.log(products) // Mengambil struktur data (Lihat response di whatsapp)
+        console.log(isSuccess) // Mengambil data apakah pengambilan data sudah sukses
         if (data.success) {
           setProducts(data.data.data);
           setFilteredProducts(data.data.data);

@@ -27,7 +27,7 @@ class ProductResource extends JsonResource
         return [
             'success' => $this->status,
             'message' => $this->message,
-            'data' => $this->resource
+            'products' => $this->resource
         ];
     }
 }
