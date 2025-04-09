@@ -1,23 +1,19 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 import './UserProfile.css';
 
-// Komponen untuk menampilkan dan mengelola profil pengguna
 const UserProfile = () => {
-  // Hook untuk mengakses data dan fungsi autentikasi
   const { user, logout } = useAuth();
 
-  // Fungsi untuk menangani proses logout
   const handleLogout = () => {
     logout();
   };
 
-  // Render komponen UserProfile
   return (
     <div className="profile-container">
       <div className="profile-box">
         <h1>Profil Pengguna</h1>
-        {/* Menampilkan informasi profil pengguna */}
         <div className="profile-info">
           <div className="profile-field">
             <label>Nama:</label>
@@ -28,7 +24,11 @@ const UserProfile = () => {
             <span>{user?.email}</span>
           </div>
         </div>
-        {/* Tombol logout */}
+        {/* Tombol Create Product */}
+        <Link to="/product/create" className="create-product-button">
+          Buat Produk
+        </Link>
+        {/* Tombol Logout */}
         <button onClick={handleLogout} className="logout-button">
           Logout
         </button>
@@ -37,4 +37,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile; 
+export default UserProfile;

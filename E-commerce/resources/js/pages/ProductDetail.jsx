@@ -1,78 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import laptopImage from '../assets/laptop.jpeg';
-import hpImage from '../assets/HP.jpeg';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import './ProductDetail.css';
 
-// Data dummy produk (dalam praktik nyata, ini akan diambil dari API)
-const products = [
-  {
-    id: 1,
-    name: "Smartphone XYZ",
-    price: 2999999,
-    description: "Smartphone terbaru dengan spesifikasi tinggi",
-    image: hpImage
-  },
-  {
-    id: 2,
-    name: "Laptop ABC",
-    price: 12999999,
-    description: "Laptop gaming dengan performa maksimal",
-    image: laptopImage
-  },
-  {
-    id: 3,
-    name: "Smartphone Pro",
-    price: 3999999,
-    description: "Smartphone premium dengan kamera berkualitas tinggi",
-    image: hpImage
-  },
-  {
-    id: 4,
-    name: "Laptop Ultra",
-    price: 15999999,
-    description: "Laptop tipis dengan performa tinggi",
-    image: laptopImage
-  }
-];
-
-// Komponen untuk menampilkan detail produk
 const ProductDetail = () => {
-  // Hook untuk mendapatkan parameter URL dan navigasi
   const { id } = useParams();
   const navigate = useNavigate();
-  
-  // Hook untuk mengakses fungsi keranjang dan wishlist
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
-  
-  // Mencari produk berdasarkan ID
-  const product = products.find(p => p.id === parseInt(id));
+  const [product, setProduct] = useState(null);
 
-  // Menampilkan pesan jika produk tidak ditemukan
+  // Mengambil detail produk dari API
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/products/${id}`);
+        const data = await response.json();
+        if (data.success) {
+          setProduct(data.data);
+        } else {
+          navigate('/products');
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      }
+    };
+
+    fetchProduct();
+  }, [id, navigate]);
+
   if (!product) {
-    return <div>Produk tidak ditemukan</div>;
+    return <div>Loading...</div>;
   }
 
   // Fungsi untuk menangani pembelian langsung
   const handleBuyNow = () => {
-    // Menyiapkan data produk untuk checkout
     const checkoutData = {
       items: [{
         ...product,
         quantity: 1
       }],
-      totalPrice: product.price,
+      totalPrice: product.harga,
       shippingCost: 15000,
-      finalTotal: product.price + 15000
+      finalTotal: product.harga + 15000
     };
 
-    // Menyimpan data checkout ke sessionStorage
     sessionStorage.setItem('checkoutData', JSON.stringify(checkoutData));
-    
-    // Navigasi ke halaman checkout
     navigate('/checkout', { state: { directBuy: true } });
   };
 
@@ -93,22 +67,16 @@ const ProductDetail = () => {
     alert('Produk berhasil ditambahkan ke keranjang!');
   };
 
-  // Render komponen ProductDetail
   return (
     <div className="product-detail-container">
       <div className="product-detail">
-        {/* Bagian gambar produk */}
         <div className="product-image">
-          <img src={product.image} alt={product.name} />
+          <img src={product.image ? `http://127.0.0.1:8000/storage/product_images/${product.image}` : 'default-image.jpg'} alt={product.nama} />
         </div>
-        
-        {/* Bagian informasi produk */}
         <div className="product-info">
-          <h1>{product.name}</h1>
-          <p className="price">Rp {product.price.toLocaleString()}</p>
-          <p className="description">{product.description}</p>
-          
-          {/* Bagian tombol aksi */}
+          <h1>{product.nama}</h1>
+          <p className="price">Rp {product.harga.toLocaleString()}</p>
+          <p className="description">{product.deskripsi}</p>
           <div className="action-buttons">
             <button className="buy-now" onClick={handleBuyNow}>
               Beli Sekarang
@@ -129,4 +97,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail; 
+export default ProductDetail;
