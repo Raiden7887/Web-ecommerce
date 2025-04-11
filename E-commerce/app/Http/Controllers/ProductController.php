@@ -22,7 +22,7 @@ class ProductController extends Controller
     }
 
     public function get_product($id) {
-        $products = Product::find($id)->first();
+        $products = Product::where('id', $id)->first();
         if ($products) {
             return new ProductResource(true, 'Mengambil data, berhasil', $products);
         }
