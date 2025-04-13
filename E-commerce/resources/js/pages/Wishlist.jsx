@@ -33,12 +33,12 @@ const Wishlist = () => {
             <div key={item.id} className="wishlist-item">
               {/* Link ke halaman detail produk */}
               <Link to={`/product/${item.id}`}>
-                <img src={item.image} alt={item.name} />
+                <img src={`http://127.0.0.1:8000/storage/product_images/${item.image}`} alt={item.name} />
               </Link>
               {/* Informasi produk */}
               <div className="wishlist-item-info">
-                <h3>{item.name}</h3>
-                <p className="price">Rp {item.price.toLocaleString()}</p>
+                <h3>{item.nama}</h3>
+                <p className="price">Rp {item.harga.toLocaleString()}</p>
                 <p className="description">{item.description}</p>
               </div>
               {/* Tombol hapus dari wishlist */}

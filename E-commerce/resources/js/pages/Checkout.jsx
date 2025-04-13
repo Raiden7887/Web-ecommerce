@@ -228,11 +228,11 @@ const Checkout = () => {
             {checkoutItems.map(item => (
               <div key={item.id} className="summary-item">
                 <div className="item-info">
-                  <span>{item.name}</span>
+                  <span>{item.nama}</span>
                   <span>x{item.quantity}</span>
                 </div>
                 <span className="item-price">
-                  Rp {(item.price * item.quantity).toLocaleString()}
+                  Rp {(item.harga * item.quantity).toLocaleString()}
                 </span>
               </div>
             ))}

@@ -1,37 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import laptopImage from '../assets/laptop.jpeg';
-import hpImage from '../assets/HP.jpeg';
 import { useCart } from '../context/CartContext';
 import './Cart.css';
 
-// Data dummy keranjang (dalam praktik nyata, ini akan diambil dari state management atau API)
-const cartItems = [
-  {
-    id: 1,
-    name: "Smartphone XYZ",
-    price: 2999999,
-    description: "Smartphone terbaru dengan spesifikasi tinggi",
-    image: hpImage,
-    quantity: 1
-  },
-  {
-    id: 2,
-    name: "Laptop ABC",
-    price: 12999999,
-    description: "Laptop gaming dengan performa maksimal",
-    image: laptopImage,
-    quantity: 1
-  },
-  {
-    id: 3,
-    name: "Smartphone Pro",
-    price: 3999999,
-    description: "Smartphone premium dengan kamera berkualitas tinggi",
-    image: hpImage,
-    quantity: 1
-  }
-];
 
 // Komponen untuk menampilkan dan mengelola keranjang belanja
 const Cart = () => {
@@ -79,10 +50,12 @@ const Cart = () => {
           <div className="cart-items">
             {cart.map(item => (
               <div key={item.id} className="cart-item">
-                <img src={item.image} alt={item.name} />
+                <Link to={`/product/${item.id}`}>
+                  <img src={`http://127.0.0.1:8000/storage/product_images/${item.image}`} alt={item.name} />
+                </Link>
                 <div className="cart-item-info">
-                  <h3>{item.name}</h3>
-                  <p className="price">Rp {item.price.toLocaleString()}</p>
+                  <h3>{item.nama}</h3>
+                  <p className="price">Rp {item.harga.toLocaleString()}</p>
                   <p className="description">{item.description}</p>
                   {/* Kontrol jumlah item */}
                   <div className="quantity-controls">

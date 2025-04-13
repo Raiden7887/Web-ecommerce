@@ -92,7 +92,7 @@ export const CartProvider = ({ children }) => {
 
   // Fungsi untuk menghitung total harga
   const getTotalPrice = () => {
-    return state.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return state.items.reduce((total, item) => total + (item.harga * item.quantity), 0);
   };
 
   // Render provider dengan value yang berisi fungsi-fungsi keranjang
