@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CreateWishlistController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductController;
@@ -23,5 +23,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', LogoutController::class)->name('logout');
     Route::post('/create/product', [ProductController::class, 'product_create']);
     Route::get('/user', [UserController::class, 'index']);
-    Route::post('/create/wishlist', CreateWishlistController::class);
+    Route::get('/wishlist', [WishlistController::class, 'show']);
+    Route::post('/create/wishlist', WishlistController::class);
 });

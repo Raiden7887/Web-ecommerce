@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\WishlistResource;
 use App\Models\Wishlist;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CreateWishlistController extends Controller
+class WishlistController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -16,7 +17,7 @@ class CreateWishlistController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id_user' => 'required',
-            'id_product' => 'required'
+            'id_product' => 'required|unique:wishlist,id_product'
         ]);
 
         if ($validator->errors()->any()) {
@@ -32,11 +33,7 @@ class CreateWishlistController extends Controller
             $wishlist->id_user = auth('api')->user()->id ? auth('api')->user()->id : $request->id_user;
             $wishlist->id_product = $request->id_product;
             if ($wishlist->save()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Wishlist sudah berhasil dibuat',
-                    'wishlists' => Wishlist::latest()->first()
-                ]);
+                return new WishlistResource(true, 'Wishlist telah berhasil dibuat', null);
             }
         } catch (Exception $e) {
             return response()->json([
@@ -45,5 +42,15 @@ class CreateWishlistController extends Controller
                 'error' => $e
             ]);
         } 
+    }
+    
+    public function show(Request $request) {
+        $wishlists = Wishlist::where('id_user', auth('api')->user()->id ? auth('api')->user()->id : $request->id_user)->get();
+        if ($wishlists) {
+            return new WishlistResource(true, 'Berhasil mengambil wishlist', $wishlists);
+        }
+        return response()->json([
+            'message' => 'Tidak ada wishlist'
+        ]);
     }
 }
