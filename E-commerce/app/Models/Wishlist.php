@@ -15,6 +15,8 @@ class Wishlist extends Model
         'id_product'
     ];
 
+    protected $table = 'wishlist';
+
     public function id_user(){
         $this->belongsTo(User::class, 'id_user', 'id');
     }

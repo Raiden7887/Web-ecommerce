@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $users = User::where('id', auth('api')->id())->first();
-        return response()->json(compact("users"));
+        // return response()->json(compact("users"));
     }
 
     public function login(Request $request) {
