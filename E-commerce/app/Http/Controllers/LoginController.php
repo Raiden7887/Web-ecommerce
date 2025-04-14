@@ -28,7 +28,7 @@ class LoginController extends Controller
 
         $cred = $request->only('email', 'password');
 
-        if ($token = auth('api')->attempt($cred)) {
+        if ($token = auth()->attempt($cred)) {
             return response()->json([
                 'success' => true,
                 'message' => 'Login berhasil',
@@ -36,5 +36,9 @@ class LoginController extends Controller
                 'token' => $token
             ]);
         }
+        return response()->json([
+            'success' => false,
+            'message' => 'Login gagal, harap mencoba lagi nanti'
+        ]);
     }
 }

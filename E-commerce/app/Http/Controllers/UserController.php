@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function index() {
-        $users = User::all();
+        $users = User::where('id', auth('api')->id())->first();
         return response()->json(compact("users"));
     }
 
@@ -42,6 +42,15 @@ class UserController extends Controller
             return response([
                 'code' => 200,
                 'message' => 'Success'
+            ]);
+        }
+    }
+
+    public function logout() {
+        if (Auth::logout()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Logout Berhasil'
             ]);
         }
     }

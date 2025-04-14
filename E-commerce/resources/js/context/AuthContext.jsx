@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 // Membuat context untuk autentikasi
 const AuthContext = createContext();
@@ -104,6 +105,8 @@ export const AuthProvider = ({ children }) => {
     // Menghapus data user dan token dari localStorage
     localStorage.removeItem('userData');
     localStorage.removeItem('userToken');
+    Cookies.remove('laravel_session');
+    Cookies.remove('XSRF-TOKEN');
     // Hapus header authorization
     delete axios.defaults.headers.common['Authorization'];
   };
