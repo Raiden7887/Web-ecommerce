@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
           <div className="product-name-price">
             <h3 title={product.nama}>{product.nama}</h3>
             <p className="price" title={`Rp ${product.harga.toLocaleString()}`}>
-              Rp {String(product.harga).toLocaleString()}
+              Rp {product.harga.toLocaleString()}
             </p>
           </div>
           <p className="description">{product.deskripsi}</p>
