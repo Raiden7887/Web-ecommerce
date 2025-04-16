@@ -21,4 +21,8 @@ class Product extends Model
         'image',
         'created_by'
     ];
+
+    public function wishlist() {
+        return $this->hasMany(Wishlist::class);
+    }
 }

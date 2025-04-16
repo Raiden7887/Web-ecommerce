@@ -29,6 +29,10 @@ class User extends Authenticatable implements JWTSubject
         'metode_pembayaran'
     ];
 
+    public function wishlist() {
+        return $this->hasMany(Wishlist::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
