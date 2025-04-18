@@ -22,6 +22,8 @@ Route::get('/product/{id}', [ProductController::class, 'get_product']);
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', LogoutController::class)->name('logout');
     Route::post('/create/product', [ProductController::class, 'product_create']);
+    Route::post('/edit/product', [ProductController:: class, 'product_edit']);
+    Route::post('/delete/product', [ProductController::class, 'product_delete']);
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/wishlist', [WishlistController::class, 'show']);
     Route::post('/create/wishlist', WishlistController::class);

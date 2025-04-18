@@ -145,6 +145,8 @@ class ProductController extends Controller
         }
 
         try {
+            $image = Product::where('id', $request->id_product)->first();
+            Storage::delete('product_image/'.$image->image);
             $delete = Product::where('id', $request->id_product)->where('created_by', auth('api')->user()->id)->delete();
             if ($delete) {
                 return response()->json([
