@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
+
 
 // Membuat context untuk autentikasi
 const AuthContext = createContext();
